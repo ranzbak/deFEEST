@@ -16,7 +16,6 @@ var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHe
 
 // Set up the 3D text 
 var loader = new THREE.FontLoader();
-//loader.load( 'fonts/helvetiker_regular.typeface.js', function ( font ) {
 loader.load( 'fonts/Comic Sans MS_Regular.js', function ( font ) {
 
   init( font );
@@ -41,8 +40,11 @@ function init( font ) {
  
   // Light to shine on deFEEST
   var light = new THREE.PointLight(0xfffff3, 0.8);
-  light.position.set(-100,200,100);
+  var light2 = new THREE.PointLight(0xfffff3, 0.8);
+  light.position.set(-100,200, 200);
+  light2.position.set(100,200,50);
   scene.add(light);
+  scene.add(light2);
  
   // create main group object
   group = new THREE.Group();
@@ -53,11 +55,17 @@ function init( font ) {
   loader.load(
       // resource URL
       'collada/deFEEST-frontback.dae',
-      //'collada/multimaterial.dae',
       // Function when resource is loaded
       function (collada) {
-        collada.scene.scale.set(50,50,50);
+
+        // Place object
+        collada.scene.scale.set(70,70,70);
+        collada.scene.position.x = -100;
+        collada.scene.position.y = 150;
+        collada.scene.position.z = 0;
         collada.scene.updateMatrix();
+        collada.scene.rotation.x = Math.PI*.5;
+
         group.add( collada.scene );
         console.log(collada);
       },
@@ -76,51 +84,52 @@ function init( font ) {
     material = new THREE.MeshBasicMaterial( { color: 0x00ff00 + cubcol } );
     var cube = new THREE.Mesh( geometry, material );
     cube.position.x = -290+i*60;
+    cube.position.y = -10;
     cubes.push(cube);
   }
 
-  // Get text from hash
-
-  var theText = "deFEEST :)";
-
-  var hash = document.location.hash.substr( 1 );
-
-  if ( hash.length !== 0 ) {
-
-    theText = hash;
-
-  }
-
-  var geometry = new THREE.TextGeometry( theText, {
-
-    font: font,
-    size: 80,
-    height: 20,
-    curveSegments: 2
-
-  });
-
+//  // Get text from hash
+//
+//  var theText = "deFEEST :)";
+//
+//  var hash = document.location.hash.substr( 1 );
+//
+//  if ( hash.length !== 0 ) {
+//
+//    theText = hash;
+//
+//  }
+//
+//  var geometry = new THREE.TextGeometry( theText, {
+//
+//    font: font,
+//    size: 80,
+//    height: 20,
+//    curveSegments: 2
+//
+//  });
+//
   geometry.computeBoundingBox();
-
-  var centerOffset = -0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
-
-  var material = new THREE.MultiMaterial( [
-    new THREE.MeshBasicMaterial( { color: 0x0000ff, overdraw: 0.5 } ),
-    new THREE.MeshBasicMaterial( { color: 0xffff00, overdraw: 0.5 } )
-  ] );
-
-  var mesh = new THREE.Mesh( geometry, material );
-
-  mesh.position.x = centerOffset;
-  mesh.position.y = 100;
-  mesh.position.z = 0;
-
-  mesh.rotation.x = 0;
-  mesh.rotation.y = Math.PI * 2;
-  
-  // Create group and add objects
-  group.add( mesh );
-
+//
+//  var centerOffset = -0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
+//
+//  var material = new THREE.MultiMaterial( [
+//    new THREE.MeshBasicMaterial( { color: 0x0000ff, overdraw: 0.5 } ),
+//    new THREE.MeshBasicMaterial( { color: 0xffff00, overdraw: 0.5 } )
+//  ] );
+//
+//  var mesh = new THREE.Mesh( geometry, material );
+//
+//  mesh.position.x = centerOffset;
+//  mesh.position.y = 100;
+//  mesh.position.z = 0;
+//
+//  mesh.rotation.x = 0;
+//  mesh.rotation.y = Math.PI * 2;
+//  
+//  // Create group and add objects
+//  group.add( mesh );
+//
   for (var curcube of cubes) {
     group.add(curcube);
   }

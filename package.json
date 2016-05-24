@@ -1,8 +1,8 @@
 {
-  "name": "threejs",
+  "name": "deFEEST",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "meuk.js",
   "dependencies": {
     "three": "^0.76.1",
     "three.js": "^0.73.2",

@@ -38,7 +38,12 @@ function init( font ) {
 
   // Get the scene object
   scene = new THREE.Scene();
-  
+ 
+  // Light to shine on deFEEST
+  var light = new THREE.PointLight(0xfffff3, 0.8);
+  light.position.set(-100,200,100);
+  scene.add(light);
+ 
   // create main group object
   group = new THREE.Group();
 

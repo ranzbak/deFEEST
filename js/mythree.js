@@ -10,10 +10,6 @@ var cubes = [];
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
-//var renderer = new THREE.WebGLRenderer();
-//renderer.setSize( window.innerWidth, window.innerHeight );
-//document.body.appendChild( renderer.domElement );
-
 // Setup some stuff to show
 
 //camera.position.z = 5;
@@ -32,7 +28,7 @@ loader.load( 'fonts/Comic Sans MS_Regular.js', function ( font ) {
 function init( font ) {
 
   // Create the renderer
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer( {antialias: true} );
   renderer.setSize( window.innerWidth, window.innerHeight );
   renderer.setClearColor( 0xf0f0f0 ); 
   document.body.appendChild( renderer.domElement );
@@ -42,6 +38,29 @@ function init( font ) {
 
   // Get the scene object
   scene = new THREE.Scene();
+  
+  // create main group object
+  group = new THREE.Group();
+
+  // Create new Collada loader
+  var loader = new THREE.ColladaLoader();
+  loader.options.convertUpAxis = true;
+  loader.load(
+      // resource URL
+      'collada/deFEEST-frontback.dae',
+      //'collada/multimaterial.dae',
+      // Function when resource is loaded
+      function (collada) {
+        collada.scene.scale.set(50,50,50);
+        collada.scene.updateMatrix();
+        group.add( collada.scene );
+        console.log(collada);
+      },
+      // Function called when download progresses
+      function (xhr){
+        console.log( (xhr.loaded/xhr.total * 100) + '% loaded' );
+      }
+  );
 
   // Setup cubes
   var cubcol = 0;
@@ -95,7 +114,6 @@ function init( font ) {
   mesh.rotation.y = Math.PI * 2;
   
   // Create group and add objects
-  group = new THREE.Group();
   group.add( mesh );
 
   for (var curcube of cubes) {
@@ -103,25 +121,6 @@ function init( font ) {
   }
 
   scene.add( group );
-
-  //var renderer = new THREE.CanvasRenderer();
-  //renderer.setClearColor( 0xf0f0f0 );
-  //renderer.setPixelRatio( window.devicePixelRatio );
-  //renderer.setSize( window.innerWidth, window.innerHeight );
-  //container.appendChild( renderer.domElement );
-
-
-  //stats = new Stats();
-  //container.appendChild( stats.dom );
-
-  //document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-  //document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-  //document.addEventListener( 'touchmove', onDocumentTouchMove, false );
-
-  //
-
-  //window.addEventListener( 'resize', onWindowResize, false );
-
 }
 
 // Render the scene 

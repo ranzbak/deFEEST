@@ -9,8 +9,8 @@
     "threejs-examples": "^60.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.0.0",
-    "babel-preset-es2015": "~6.9.0",
+    "babel-cli": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
     "three-loaders-collada": "^1.0.1"
   },
   "scripts": {

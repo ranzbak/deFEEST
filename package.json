@@ -1,7 +1,7 @@
 {
   "name": "deFEEST",
   "version": "1.0.0",
-  "description": "",
+  "description": "deFEEST intro screen",
   "main": "meuk.js",
   "dependencies": {
     "three": "^0.76.1",
@@ -17,6 +17,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "babel js/three.js js/ColladaLoader.js js/mythree.js --source-maps --debug  --presets es2015 --out-file meuk.js"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Ranzbak & Anus",
+  "license": "WTFPL",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ranzbak/defeest-treejs.git"
+  }
 }

@@ -4,7 +4,7 @@
   "description": "deFEEST intro screen",
   "main": "meuk.js",
   "dependencies": {
-    "three": "^0.76.1",
+    "three": "~>0.125.0",
     "three.js": "^0.73.2",
     "threejs-examples": "^60.0.0"
   },
